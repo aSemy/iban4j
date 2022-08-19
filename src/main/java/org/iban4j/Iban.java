@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,11 +27,13 @@ import static org.iban4j.IbanFormatException.IbanFormatViolation.*;
 /**
  * International Bank Account Number
  *
- * <a href="http://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>.
+ * <a href="https://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>.
  */
 public final class Iban {
 
     static final String DEFAULT_CHECK_DIGIT = "00";
+
+    private static final Random DEFAULT_RANDOM = new Random();
 
     // Cache string value of the iban
     private final String value;
@@ -194,11 +196,19 @@ public final class Iban {
     }
 
     public static Iban random() {
-        return new Iban.Builder().buildRandom();
+        return random(DEFAULT_RANDOM);
+    }
+
+    public static Iban random(Random random) {
+        return new Iban.Builder(random).buildRandom();
     }
 
     public static Iban random(CountryCode cc) {
-        return new Iban.Builder().countryCode(cc).buildRandom();
+        return new Iban.Builder(DEFAULT_RANDOM).countryCode(cc).buildRandom();
+    }
+
+    public static Iban random(Random random, CountryCode cc) {
+        return new Iban.Builder(random).countryCode(cc).buildRandom();
     }
 
     @Override
@@ -228,12 +238,20 @@ public final class Iban {
         private String ownerAccountType;
         private String identificationNumber;
 
-        private final Random random = new Random();
+        private final Random random;
 
         /**
          * Creates an Iban Builder instance.
          */
         public Builder() {
+            this.random = new Random();
+        }
+
+        /**
+         * Creates an Iban Builder instance.
+         */
+        public Builder(Random random) {
+            this.random = random;
         }
 
         /**
@@ -329,7 +347,7 @@ public final class Iban {
          *
          * @return new iban instance.
          * @exception IbanFormatException if values are not parsable by Iban Specification
-         *  <a href="http://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>
+         *  <a href="https://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>
          * @exception UnsupportedCountryException if country is not supported
          */
         public Iban build() throws IbanFormatException,
@@ -344,7 +362,7 @@ public final class Iban {
          *  validated after generation
          * @return new iban instance.
          * @exception IbanFormatException if values are not parsable by Iban Specification
-         *  <a href="http://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>
+         *  <a href="https://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>
          * @exception UnsupportedCountryException if country is not supported
          */
         public Iban build(boolean validate) throws IbanFormatException,
@@ -372,7 +390,7 @@ public final class Iban {
          *
          * @return random iban instance.
          * @exception IbanFormatException if values are not parsable by Iban Specification
-         *  <a href="http://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>
+         *  <a href="https://en.wikipedia.org/wiki/ISO_13616">ISO_13616</a>
          * @exception UnsupportedCountryException if country is not supported
          *
          */
@@ -382,7 +400,7 @@ public final class Iban {
                 List<CountryCode> countryCodes = BbanStructure.supportedCountries();
                 this.countryCode(countryCodes.get(random.nextInt(countryCodes.size())));
             }
-            fillMissingFieldsRandomly();
+            fillMissingFieldsRandomly(random);
             return build();
         }
 
@@ -457,7 +475,7 @@ public final class Iban {
             }
         }
 
-        private void fillMissingFieldsRandomly() {
+        private void fillMissingFieldsRandomly(Random random) {
             final BbanStructure structure = BbanStructure.forCountry(countryCode);
 
             if (structure == null) {
@@ -469,37 +487,37 @@ public final class Iban {
                 switch (entry.getEntryType()) {
                     case bank_code:
                         if (bankCode == null) {
-                            bankCode = entry.getRandom();
+                            bankCode = entry.getRandom(random);
                         }
                         break;
                     case branch_code:
                         if (branchCode == null) {
-                            branchCode = entry.getRandom();
+                            branchCode = entry.getRandom(random);
                         }
                         break;
                     case account_number:
                         if (accountNumber == null) {
-                            accountNumber = entry.getRandom();
+                            accountNumber = entry.getRandom(random);
                         }
                         break;
                     case national_check_digit:
                         if (nationalCheckDigit == null) {
-                            nationalCheckDigit = entry.getRandom();
+                            nationalCheckDigit = entry.getRandom(random);
                         }
                         break;
                     case account_type:
                         if (accountType == null) {
-                            accountType = entry.getRandom();
+                            accountType = entry.getRandom(random);
                         }
                         break;
                     case owner_account_number:
                         if (ownerAccountType == null) {
-                            ownerAccountType = entry.getRandom();
+                            ownerAccountType = entry.getRandom(random);
                         }
                         break;
                     case identification_number:
                         if (identificationNumber == null) {
-                            identificationNumber = entry.getRandom();
+                            identificationNumber = entry.getRandom(random);
                         }
                         break;
                 }

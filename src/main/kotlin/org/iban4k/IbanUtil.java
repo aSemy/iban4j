@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.iban4j;
+package org.iban4k;
 
+import org.iban4j.IbanFormatException;
+import org.iban4j.InvalidCheckDigitException;
+import org.iban4j.UnsupportedCountryException;
 import org.iban4j.bban.BbanEntryType;
 import org.iban4j.bban.BbanStructure;
 import org.iban4j.bban.BbanStructureEntry;
@@ -68,7 +71,7 @@ public final class IbanUtil {
      *         InvalidCheckDigitException if iban has invalid check digit.
      */
     public static void validate(final String iban) throws IbanFormatException,
-            InvalidCheckDigitException, UnsupportedCountryException {
+        InvalidCheckDigitException, UnsupportedCountryException {
         try {
             validateEmpty(iban);
             validateCountryCode(iban);
@@ -97,7 +100,7 @@ public final class IbanUtil {
      *         InvalidCheckDigitException if iban has invalid check digit.
      */
     public static void validate(final String iban, final IbanFormat format) throws IbanFormatException,
-            InvalidCheckDigitException, UnsupportedCountryException {
+        InvalidCheckDigitException, UnsupportedCountryException {
         switch (format) {
             case Default:
                 final String ibanWithoutSpaces = iban.replace(" ", "");
@@ -116,7 +119,7 @@ public final class IbanUtil {
 
     /**
      * Checks whether country is supporting iban.
-     * @param countryCode {@link org.iban4j.CountryCode}
+     * @param countryCode {@link CountryCode}
      *
      * @return boolean true if country supports iban, false otherwise.
      */
@@ -127,7 +130,7 @@ public final class IbanUtil {
     /**
      * Returns iban length for the specified country.
      *
-     * @param countryCode {@link org.iban4j.CountryCode}
+     * @param countryCode {@link CountryCode}
      * @return the length of the iban for the specified country.
      */
     public static int getIbanLength(final CountryCode countryCode) {

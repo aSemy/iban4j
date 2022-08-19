@@ -13,17 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.iban4j.bban;
+package org.iban4k.bban
 
 /**
  * Basic Bank Account Number Entry Types.
  */
-public enum BbanEntryType {
-        bank_code,
-        branch_code,
-        account_number,
-        national_check_digit,
-        account_type,
-        owner_account_number,
-        identification_number
+enum class BbanEntryType {
+  bank_code, branch_code, account_number, national_check_digit, account_type, owner_account_number, identification_number
 }

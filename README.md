@@ -4,7 +4,7 @@ iban4j
 [![Build Status](https://api.travis-ci.org/repositories/arturmkrtchyan/iban4j.png)](https://travis-ci.org/arturmkrtchyan/iban4j) [![Coverage Status](https://img.shields.io/coveralls/arturmkrtchyan/iban4j.svg)](https://coveralls.io/r/arturmkrtchyan/iban4j) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.iban4j/iban4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.iban4j/iban4j)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/arturmkrtchyan/iban4j/master/LICENSE.txt)
 
-A Java library for generation and validation of the International Bank Account Numbers (<a href="http://en.wikipedia.org/wiki/ISO_13616" target="_blank">IBAN ISO_13616</a>) and Business Identifier Codes (<a href="http://en.wikipedia.org/wiki/ISO_9362" target="_blank">BIC ISO_9362</a>).
+A Java library for generation and validation of the International Bank Account Numbers (<a href="https://en.wikipedia.org/wiki/ISO_13616" target="_blank">IBAN ISO_13616</a>) and Business Identifier Codes (<a href="https://en.wikipedia.org/wiki/ISO_9362" target="_blank">BIC ISO_9362</a>).
 
 
 #### Iban quick examples:
@@ -73,12 +73,12 @@ A Java library for generation and validation of the International Bank Account N
 
 #### References
 
-- http://en.wikipedia.org/wiki/ISO_13616
-- http://en.wikipedia.org/wiki/ISO_9362
+- https://en.wikipedia.org/wiki/ISO_13616
+- https://en.wikipedia.org/wiki/ISO_9362
 - https://www.ecb.europa.eu/paym/retpaym/paymint/sepa/shared/pdf/iban_registry.pdf
 
 ## License
 Copyright 2015 Artur Mkrtchyan.
 
-Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+Licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
 

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,12 +21,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Collection;
+import java.util.Random;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class IbanTest {
@@ -387,7 +387,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandom() {
+        public void ibanConstructionRandom() {
             for (int i = 0; i < 100; i++) {
                 new Iban.Builder().buildRandom();
                 Iban.random();
@@ -395,7 +395,17 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomAcctRetainsSpecifiedCountry() {
+        public void ibanConstructionSeededRandom() {
+            Iban expected = Iban.random(new Random(1));
+
+            for (int i = 0; i < 100; i++) {
+                Iban generated = Iban.random(new Random(1));
+                assertEquals(expected, generated);
+            }
+        }
+
+        @Test
+        public void ibanConstructionRandomAcctRetainsSpecifiedCountry() {
             Iban iban = new Iban.Builder().countryCode(CountryCode.AT).buildRandom();
             assertThat(iban.getCountryCode(), is(equalTo(CountryCode.AT)));
 
@@ -404,7 +414,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomRetainsSpecifiedBankCode() {
+        public void ibanConstructionRandomRetainsSpecifiedBankCode() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.AT)
                     .bankCode("12345")
@@ -413,7 +423,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomDoesNotOverwriteBankAccount() {
+        public void ibanConstructionRandomDoesNotOverwriteBankAccount() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.AT)
                     .accountNumber("12345678901")
@@ -422,7 +432,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomDoesNotOverwriteBranchCode() {
+        public void ibanConstructionRandomDoesNotOverwriteBranchCode() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.AL)
                     .branchCode("1234")
@@ -431,7 +441,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomDoesNotOverwriteNationalCheckDigit() {
+        public void ibanConstructionRandomDoesNotOverwriteNationalCheckDigit() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.AL)
                     .nationalCheckDigit("1")
@@ -440,7 +450,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomDoesNotOverwriteAccountType() {
+        public void ibanConstructionRandomDoesNotOverwriteAccountType() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.BR)
                     .accountType("A")
@@ -449,7 +459,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomDoesNotOverwriteOwnerAccountType() {
+        public void ibanConstructionRandomDoesNotOverwriteOwnerAccountType() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.BR)
                     .ownerAccountType("C")
@@ -458,7 +468,7 @@ public class IbanTest {
         }
 
         @Test
-        public void ibanContructionRandomDoesNotOverwriteIdentificationNumber() {
+        public void ibanConstructionRandomDoesNotOverwriteIdentificationNumber() {
             Iban iban = new Iban.Builder()
                     .countryCode(CountryCode.IS)
                     .identificationNumber("1234567890")

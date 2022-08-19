@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.iban4j;
+package org.iban4k;
+
+import org.iban4j.BicFormatException;
+import org.iban4j.UnsupportedCountryException;
 
 import static org.iban4j.BicFormatException.BicFormatViolation.*;
 
@@ -42,7 +45,7 @@ public class BicUtil {
      *         UnsupportedCountryException if bic's country is not supported.
      */
     public static void validate(final String bic) throws BicFormatException,
-            UnsupportedCountryException {
+        UnsupportedCountryException {
         try {
             validateEmpty(bic);
             validateLength(bic);

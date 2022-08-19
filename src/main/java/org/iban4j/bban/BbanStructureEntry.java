@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +29,8 @@ public class BbanStructureEntry {
     private final int length;
 
     private static Map<EntryCharacterType, char[]> charByCharacterType;
-    private final Random random = new Random();
+
+    private static final Random DEFAULT_RANDOM = new Random();
 
     static {
         charByCharacterType = new HashMap<EntryCharacterType, char[]>();
@@ -110,6 +111,10 @@ public class BbanStructureEntry {
     }
 
     public String getRandom() {
+        return getRandom(DEFAULT_RANDOM);
+    }
+
+    public String getRandom(Random random) {
         StringBuilder s = new StringBuilder("");
         char[] charChoices = charByCharacterType.get(characterType);
         if (charChoices == null) {
