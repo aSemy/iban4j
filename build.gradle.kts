@@ -41,10 +41,10 @@ val downloadCountriesData by tasks.registering(Sync::class) {
 val downloadIbanRegistryData by tasks.registering(Sync::class) {
   from(
     resources.text.fromUri(
-      "https://www.swift.com/node/11971"
+      "https://www.swift.com/swift-resource/11971/download"
     )
   ) {
-    rename { "registry.txt" }
+    rename { "registry.tsv" }
   }
   into(layout.projectDirectory.dir("src/main/resources/iban_data"))
 }
@@ -53,4 +53,14 @@ val downloadIbanRegistryData by tasks.registering(Sync::class) {
 tasks.wrapper {
   gradleVersion = "7.5.1"
   distributionType = Wrapper.DistributionType.ALL
+}
+
+dataframes {
+  schema {
+    data = layout.projectDirectory.dir("src/main/resources/iban_data/registry.csv").asFile
+    name = "org.example.Repository"
+    csvOptions {
+//      delimiter = '\t'
+    }
+  }
 }

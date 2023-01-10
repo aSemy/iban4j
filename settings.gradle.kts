@@ -1,4 +1,4 @@
-rootProject.name = "iban4j"
+rootProject.name = "iban4k"
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {

@@ -2,6 +2,7 @@ import okio.FileSystem
 import okio.Path.Companion.toPath
 import okio.buffer
 import org.jetbrains.kotlinx.dataframe.DataFrame
+import org.jetbrains.kotlinx.dataframe.api.rows
 import org.jetbrains.kotlinx.dataframe.io.readTSV
 
 fun main() {
